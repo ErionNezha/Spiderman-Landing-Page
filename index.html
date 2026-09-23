@@ -66,7 +66,7 @@ footer strong{color:#9fb3c8}
 </div>
 <main>
 <div class="note">💡 Demo-ja live ekzekutohet direkt në browser. Kliko <strong>Kodi Burim</strong> për të parë kodin e plotë të projektit.</div>
-<div id="p-demo" class="panel active"><iframe class="demo" src="original/index.html" title="Live demo"></iframe></div>
+<div id="p-demo" class="panel active"><iframe class="demo" src="demo/index.html" title="Live demo"></iframe></div>
 <div id="p-code" class="panel"><div class="codewrap">
 <aside class="tree" id="tree"></aside>
 <div class="codeview"><div class="cbar" id="cbar"></div><div id="codebox"><pre></pre></div></div>
@@ -75,6 +75,7 @@ footer strong{color:#9fb3c8}
 <footer>Krijuar nga <strong>Erion Nezha</strong> — © 2026</footer>
 <script>
 const TREE={"dirs": [{"name": "css", "dirs": [{"name": "scss", "dirs": [], "files": ["_animations.scss", "_colors.scss", "_fonts.scss", "_general.scss", "_layout.scss", "_menu.scss", "_responsive.scss", "_scrollBar.scss", "_spacing.scss", "_video.scss"]}], "files": ["style.css", "style.css.map", "style.scss"]}, {"name": "fonts", "dirs": [], "files": ["amazing_spider_man.ttf", "spiderfont.ttf"]}, {"name": "images", "dirs": [], "files": ["be-yourself.jpg", "home.jpg", "miles-morales.png", "spider-fly-min.png", "spider-man-min.png", "spider-miles-min.png", "spiderman-flying.png", "spiderman-min.png", "spiderman-text.png"]}, {"name": "js", "dirs": [{"name": "lightbox", "dirs": [{"name": ".github", "dirs": [], "files": ["ISSUE_TEMPLATE.md", "PULL_REQUEST_TEMPLATE.md"]}, {"name": "dist", "dirs": [{"name": "css", "dirs": [], "files": ["lightbox.css", "lightbox.min.css"]}, {"name": "images", "dirs": [], "files": ["close.png", "loading.gif", "next.png", "prev.png"]}, {"name": "js", "dirs": [], "files": ["lightbox-plus-jquery.js", "lightbox-plus-jquery.min.js", "lightbox-plus-jquery.min.map", "lightbox.js", "lightbox.min.js", "lightbox.min.map"]}], "files": []}, {"name": "examples", "dirs": [], "files": ["index.html"]}, {"name": "src", "dirs": [{"name": "css", "dirs": [], "files": ["lightbox.css"]}, {"name": "images", "dirs": [], "files": ["close.png", "loading.gif", "next.png", "prev.png"]}, {"name": "js", "dirs": [], "files": ["lightbox.js"]}], "files": []}], "files": [".editorconfig", ".gitignore", ".jscsrc", ".jshintrc", "DEPLOY.md", "Gruntfile.js", "LICENSE", "README.md", "ROADMAP.md", "bower.json", "package.json"]}], "files": ["app.js", "menu.js", "svg-inject.min.js", "tilt.jquery.js", "video.js"]}, {"name": "svg", "dirs": [], "files": ["icon-facebook.svg", "icon-instagram.svg", "icon-twitter.svg", "icon-youtube.svg", "logo-spider.svg", "marvel.svg", "ps.svg"]}, {"name": "video", "dirs": [], "files": ["spiderman2-compress.mp4"]}], "files": ["index.html", "lis-moi.txt"]};
+const CODEDIR="demo";
 const IMG=/\.(png|jpe?g|gif|svg|webp|ico|bmp)$/i;
 function show(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('p-'+id).classList.add('active');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 function buildTree(){
@@ -88,8 +89,8 @@ async function openFile(path,el){
   document.querySelectorAll('.tfile').forEach(e=>e.classList.remove('active'));el.classList.add('active');
   document.getElementById('cbar').textContent=path;
   const box=document.getElementById('codebox');
-  if(IMG.test(path)){box.innerHTML='<img class="preview" src="original/'+path+'">';return;}
-  try{const r=await fetch('original/'+path);const txt=await r.text();
+  if(IMG.test(path)){box.innerHTML='<img class="preview" src="'+CODEDIR+'/'+path+'">';return;}
+  try{const r=await fetch(CODEDIR+'/'+path);const txt=await r.text();
     box.innerHTML='<pre>'+hl(txt,path.split('.').pop())+'</pre>';
   }catch(e){box.innerHTML='<pre>Deshtoi leximi i file-it.</pre>';}
 }
